@@ -1,0 +1,15 @@
+.iframe-holder {
+  width: 100%;
+  height: calc(100vh - 228px);
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding-bottom: 128px;
+
+  .iframe {
+    transform: scale(3);
+    transform-origin: 0 0;
+    width: 35%;
+    height: 100%;
+    border: none;
+  }
+}

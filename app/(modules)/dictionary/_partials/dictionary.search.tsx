@@ -2,19 +2,12 @@
 
 import { IDefinition } from "@/app/(modules)/dictionary/type";
 import { GridCol, GridRow } from "@/app/_components/grids";
-import { VolumeUp } from "@mui/icons-material";
-import { Box, Button, Container, IconButton, List, ListItem, Stack, TextField, Typography } from "@mui/material";
-import React, { FormEvent, useCallback, useRef, useState } from "react";
+import { Box, Button, Container, List, ListItem, Stack, TextField, Typography } from "@mui/material";
+import React, { FormEvent, useCallback, useState } from "react";
 
 export default function DictionarySearch() {
   const [term, setTerm] = useState("");
   const [definitions, setDefinitions] = useState<IDefinition[]>([]);
-
-  const audioRef = useRef<HTMLAudioElement>(null);
-
-  const handlePlay = () => {
-    audioRef.current?.play();
-  };
 
   const handleSearchDefinition = useCallback(
     async (event: FormEvent) => {
@@ -55,7 +48,7 @@ export default function DictionarySearch() {
                 onChange={({ target }) => setTerm(target.value)}
               />
               <Button variant="contained" type="submit">
-                Search
+                Define
               </Button>
             </Stack>
           </Box>
@@ -69,14 +62,10 @@ export default function DictionarySearch() {
                     <Typography pr={4} fontSize={64} lineHeight={1}>
                       {definition?.word}
                     </Typography>
-                    <Stack direction={"row"} alignItems={"center"}>
+                    <Stack direction={"row"} spacing={2} alignItems={"center"}>
                       {definition?.phonetics?.map((phonetic, i) => (
                         <React.Fragment key={i}>
                           <Typography>{phonetic?.text}</Typography>
-                          <audio ref={audioRef} src={phonetic?.audio || undefined} />
-                          <IconButton onClick={handlePlay}>
-                            <VolumeUp />
-                          </IconButton>
                         </React.Fragment>
                       ))}
                     </Stack>
