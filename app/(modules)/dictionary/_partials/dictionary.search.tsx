@@ -54,7 +54,7 @@ export default function DictionarySearch() {
           </Box>
         </GridCol>
         <GridCol>
-          <List>
+          <List sx={{ overflow: "auto", height: 640 }}>
             {definitions?.map((definition, i) => (
               <ListItem key={i}>
                 <GridRow>
@@ -71,7 +71,7 @@ export default function DictionarySearch() {
                     </Stack>
                   </GridCol>
                   <GridCol>
-                    <List sx={{ overflow: "auto", height: 500 }}>
+                    <List>
                       {definition?.meanings?.map((meaning, i) => (
                         <ListItem key={i}>
                           <Stack>

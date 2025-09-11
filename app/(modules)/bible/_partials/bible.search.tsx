@@ -94,7 +94,7 @@ export default function BibleSearch() {
         </GridCol>
         <GridCol>
           <Box className="iframe-holder">
-            <Box component={"iframe"} src={url} title="Bible Gateway" loading="lazy" className="iframe" />
+            <Box component={"iframe"} src={url || undefined} title="Bible Gateway" loading="lazy" className="iframe" />
           </Box>
         </GridCol>
       </GridRow>
