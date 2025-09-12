@@ -7,35 +7,17 @@ export default function NavSide() {
     <Paper elevation={4} component={"nav"} id="nav-side">
       <List>
         <ListItem>
-          <Button
-            fullWidth
-            LinkComponent={Link}
-            href="/topic"
-            startIcon={<Topic />}
-            variant="contained"
-          >
+          <Button fullWidth LinkComponent={Link} href="/topic" startIcon={<Topic />} variant="contained">
             Topic
           </Button>
         </ListItem>
         <ListItem>
-          <Button
-            fullWidth
-            LinkComponent={Link}
-            href="/dictionary"
-            startIcon={<Summarize />}
-            variant="contained"
-          >
+          <Button fullWidth LinkComponent={Link} href="/dictionary" startIcon={<Summarize />} variant="contained">
             Dictionary
           </Button>
         </ListItem>
         <ListItem>
-          <Button
-            fullWidth
-            LinkComponent={Link}
-            href="/bible"
-            startIcon={<MenuBook />}
-            variant="contained"
-          >
+          <Button fullWidth LinkComponent={Link} href="/bible" startIcon={<MenuBook />} variant="contained">
             Bible
           </Button>
         </ListItem>

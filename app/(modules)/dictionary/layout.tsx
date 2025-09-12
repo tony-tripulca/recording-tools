@@ -12,7 +12,7 @@ export default function Layout({
   return (
     <GridRow>
       <GridCol size={{ xs: 12, xl: 9 }}>
-        <SectionMain module="search">{children}</SectionMain>
+        <SectionMain module="dictionary">{children}</SectionMain>
       </GridCol>
       <GridCol size={{ xs: 12, xl: 3 }}>
         <NavSide />

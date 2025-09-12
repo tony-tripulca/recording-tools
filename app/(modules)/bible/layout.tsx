@@ -11,10 +11,10 @@ export default function Layout({
 }>) {
   return (
     <GridRow>
-      <GridCol size={{ xs: 12, xl: 9 }}>
-        <SectionMain module="topic">{children}</SectionMain>
+      <GridCol size={{ xs: 12, xl: 8 }}>
+        <SectionMain module="bible">{children}</SectionMain>
       </GridCol>
-      <GridCol size={{ xs: 12, xl: 3 }}>
+      <GridCol size={{ xs: 12, xl: 4 }}>
         <NavSide />
       </GridCol>
     </GridRow>
