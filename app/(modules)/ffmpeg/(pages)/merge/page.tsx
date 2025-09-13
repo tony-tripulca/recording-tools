@@ -1,5 +1,5 @@
-import FfmpegConvert from "@/app/(modules)/ffmpeg/_partials/ffmpeg.convert";
+import FfmpegMerge from "@/app/(modules)/ffmpeg/_partials/ffmpeg.merge";
 
 export default function Page() {
-  return <FfmpegConvert />;
+  return <FfmpegMerge />;
 }

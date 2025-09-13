@@ -5,7 +5,7 @@ import { GridCol, GridRow } from "@/app/_components/grids";
 import { Button, Container, Input, Stack, Typography } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 
-export default function FfmpegConvert() {
+export default function FfmpegBoostAudio() {
   const [file, setFile] = useState<File | null | undefined>(null);
   const [file_info, setFileInfo] = useState<IFileInfo | null>(null);
   const [format, setFormat] = useState("");
@@ -117,8 +117,8 @@ export default function FfmpegConvert() {
             )}
           </Stack>
         </GridCol>
+
         <GridCol>
-          <Typography variant="caption">Format</Typography>
           <Stack direction={"row"} spacing={1}>
             {formats.map((item, i) => (
               <Button
