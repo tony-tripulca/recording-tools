@@ -25,17 +25,16 @@ const versions = [
   { label: "New Life Version (NLV)", value: "NLV" },
   { label: "Revised Geneva Translation (RGT)", value: "RGT" },
   { label: "Young's Literal Translation (YLT)", value: "YLT" },
-  { label: "Ang Biblia (1978)", value: "ABTAG1978" },
-  { label: "Ang Biblia, 2001", value: "ABTAG2001" },
-  { label: "Ang Salita ng Dios (Tagalog Contemporary Bible)", value: "ASND" },
-  { label: "Ang Salita ng Diyos", value: "SND" },
-  { label: "Magandang Balita Biblia", value: "MBBTAG" },
-
+  { label: "Ang Biblia, 1978 (ABTAG1978)", value: "ABTAG1978" },
+  { label: "Ang Biblia, 2001 (ABTAG2001)", value: "ABTAG2001" },
+  { label: "Ang Salita ng Dios, Tagalog Contemporary Bible (ASND) ", value: "ASND" },
+  { label: "Ang Salita ng Diyos (SND)", value: "SND" },
+  { label: "Magandang Balita Biblia (MBBTAG)", value: "MBBTAG" },
 ];
 
 export default function BibleSearch() {
   const [verses, setVerses] = useState("");
-  const [version, setVersion] = useState("");
+  const [version, setVersion] = useState("MBBTAG");
   const [url, setUrl] = useState("");
 
   const handleFindVerses = (event: FormEvent<HTMLFormElement>) => {
@@ -59,15 +58,7 @@ export default function BibleSearch() {
       <GridRow>
         <GridCol sx={{ display: "flex", justifyContent: "center" }}>
           <Box component={"form"} onSubmit={handleFindVerses}>
-            <Stack direction={"row"} spacing={1} width={680}>
-              <TextField
-                fullWidth
-                size="small"
-                type="search"
-                name="verses"
-                value={verses}
-                onChange={({ target }) => setVerses(target.value)}
-              />
+            <Stack direction={"row"} spacing={1} width={880}>
               <FormControl fullWidth size="small">
                 <Select name="version" value={version} onChange={({ target }) => setVersion(target.value)}>
                   {versions.map((v) => (
@@ -77,6 +68,14 @@ export default function BibleSearch() {
                   ))}
                 </Select>
               </FormControl>
+              <TextField
+                fullWidth
+                size="small"
+                type="search"
+                name="verses"
+                value={verses}
+                onChange={({ target }) => setVerses(target.value)}
+              />
               <Button variant="contained" type="submit">
                 Find
               </Button>

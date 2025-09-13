@@ -4,8 +4,8 @@ import { GridCol, GridRow } from "@/app/_components/grids";
 import { Box, Container, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
-export default function TopicCreate() {
-  const [topic, setTopic] = useState("");
+export default function QuestionCreate() {
+  const [question, setQuestion] = useState("");
 
   return (
     <Container maxWidth={false} sx={{ py: 2 }}>
@@ -14,11 +14,11 @@ export default function TopicCreate() {
           <Stack direction={"row"} spacing={1} width={512}>
             <TextField
               fullWidth
-              label="Topic"
+              label="Question"
               size="small"
               type="text"
-              value={topic}
-              onChange={({ target }) => setTopic(target.value)}
+              value={question}
+              onChange={({ target }) => setQuestion(target.value)}
             />
           </Stack>
         </GridCol>
@@ -31,8 +31,8 @@ export default function TopicCreate() {
               justifyContent: "center",
             }}
           >
-            <Typography fontSize={128} textAlign={"center"}>
-              {topic}
+            <Typography fontSize={72} textAlign={"center"}>
+              {question}
             </Typography>
           </Box>
         </GridCol>
