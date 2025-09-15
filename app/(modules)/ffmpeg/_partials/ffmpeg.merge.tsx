@@ -2,7 +2,7 @@
 
 import { GridCol, GridRow } from "@/app/_components/grids";
 import { Button, Container, Input, Stack, Typography } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 export default function FfmpegMerge() {
   const [files, setFiles] = useState<File[]>([]);
@@ -66,7 +66,6 @@ export default function FfmpegMerge() {
   };
 
   const formats = [
-    { label: "MP3", value: "mp3" },
     { label: "MP4", value: "mp4" },
     { label: "MKV", value: "mkv" },
   ];
@@ -75,6 +74,10 @@ export default function FfmpegMerge() {
     { label: "1280x720", value: "1280x720" },
     { label: "1920x1080", value: "1920x1080" },
   ];
+
+  useEffect(() => {
+    console.log(format);
+  }, [format]);
 
   return (
     <Container maxWidth={false}>

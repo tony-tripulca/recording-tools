@@ -8,6 +8,7 @@ export default function RootPage() {
       <GridCol size={{ xs: 12, xl: 8 }}>
         <Container maxWidth={false}>
           <Box sx={{ ".MuiTypography-root span": { fontSize: 44, fontWeight: "bold" } }}>
+            <Typography fontSize={22} mt={8}>Romans 12:1-2</Typography>
             <Typography fontSize={32}>
               Therefore, I urge you, brothers and sisters, in view of God&apos;s mercy, to offer your bodies as a living
               sacrifice, holy and <span>pleasing</span> to God—this is your true and proper worship.{" "}

@@ -2,13 +2,13 @@
 
 import { IFileInfo } from "@/app/(modules)/ffmpeg/type";
 import { GridCol, GridRow } from "@/app/_components/grids";
-import { Button, Container, Input, Stack, Typography } from "@mui/material";
+import { Button, Container, Input, Slider, Stack, Typography } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 
 export default function FfmpegBoostAudio() {
   const [file, setFile] = useState<File | null | undefined>(null);
   const [file_info, setFileInfo] = useState<IFileInfo | null>(null);
-  const [format, setFormat] = useState("");
+  const [multiplier, setMultiplier] = useState(1);
 
   const handleFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.currentTarget.files?.[0];
@@ -46,9 +46,9 @@ export default function FfmpegBoostAudio() {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("format", format);
+    formData.append("multiplier", multiplier.toString());
 
-    const res = await fetch("/api/ffmpeg/convert", {
+    const res = await fetch("/api/ffmpeg/boost-audio", {
       method: "POST",
       body: formData,
     });
@@ -57,18 +57,32 @@ export default function FfmpegBoostAudio() {
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
 
+      // ✅ Get filename from Content-Disposition header
+      const disposition = res.headers.get("Content-Disposition");
+      let filename = "converted";
+      if (disposition && disposition.includes("filename=")) {
+        filename = disposition.split("filename=")[1].replace(/["']/g, ""); // remove quotes
+      }
+
       // Download file automatically
       const a = document.createElement("a");
       a.href = url;
-      a.download = `converted.${format}`; // match your format
+      a.download = filename; // use real filename from server
       a.click();
     }
   };
 
-  const formats = [
-    { label: "MP3", value: "mp3" },
-    { label: "MP4", value: "mp4" },
-    { label: "MKV", value: "mkv" },
+  const volumes = [
+    { label: "1x", value: 1 },
+    { label: "2x", value: 2 },
+    { label: "3x", value: 3 },
+    { label: "4x", value: 4 },
+    { label: "5x", value: 5 },
+    { label: "6x", value: 6 },
+    { label: "7x", value: 7 },
+    { label: "8x", value: 8 },
+    { label: "9x", value: 9 },
+    { label: "10x", value: 10 },
   ];
 
   return (
@@ -117,26 +131,29 @@ export default function FfmpegBoostAudio() {
             )}
           </Stack>
         </GridCol>
-
         <GridCol>
-          <Stack direction={"row"} spacing={1}>
-            {formats.map((item, i) => (
-              <Button
-                variant={format === item.value ? "contained" : "outlined"}
-                key={i}
-                onClick={() => setFormat(item.value)}
-              >
-                {item.label}
-              </Button>
-            ))}
-          </Stack>
+          <Typography variant="caption">Volume</Typography>
+          <Slider
+            defaultValue={10}
+            value={multiplier}
+            onChange={(_, value) => {
+              // value can be number or number[]
+              if (typeof value === "number") {
+                setMultiplier(value);
+              }
+            }}
+            valueLabelDisplay="auto"
+            shiftStep={30}
+            step={1}
+            marks={volumes}
+            min={1}
+            max={10}
+          />
         </GridCol>
         <GridCol>
-          <Stack direction={"row"} spacing={1}>
-            <Button variant="contained" onClick={handleUpload}>
-              Convert & Download
-            </Button>
-          </Stack>
+          <Button variant="contained" onClick={handleUpload}>
+            Boost & Download
+          </Button>
         </GridCol>
       </GridRow>
     </Container>
