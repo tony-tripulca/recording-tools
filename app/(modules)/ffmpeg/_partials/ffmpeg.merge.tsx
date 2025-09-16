@@ -2,7 +2,7 @@
 
 import { GridCol, GridRow } from "@/app/_components/grids";
 import { Button, Container, Input, Stack, Typography } from "@mui/material";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 export default function FfmpegMerge() {
   const [files, setFiles] = useState<File[]>([]);
@@ -28,11 +28,11 @@ export default function FfmpegMerge() {
   };
 
   const handleUpload = async () => {
-    setLoading(true);
-
     if (files.length < 2) {
       return alert("Select at least 2 videos to merge");
     }
+
+    setLoading(true);
 
     const formData = new FormData();
     files.forEach((file, idx) => {
@@ -55,7 +55,7 @@ export default function FfmpegMerge() {
       // Auto-download merged video
       const a = document.createElement("a");
       a.href = url;
-      a.download = "merged.mp4";
+      a.download = `merged.${format}`;
       a.click();
       URL.revokeObjectURL(url);
     } catch (err) {
@@ -74,10 +74,6 @@ export default function FfmpegMerge() {
     { label: "1280x720", value: "1280x720" },
     { label: "1920x1080", value: "1920x1080" },
   ];
-
-  useEffect(() => {
-    console.log(format);
-  }, [format]);
 
   return (
     <Container maxWidth={false}>

@@ -8,6 +8,7 @@ import { ChangeEvent, useState } from "react";
 export default function FfmpegBoostAudio() {
   const [file, setFile] = useState<File | null | undefined>(null);
   const [file_info, setFileInfo] = useState<IFileInfo | null>(null);
+  const [loading, setLoading] = useState(false);
   const [multiplier, setMultiplier] = useState(1);
 
   const handleFile = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +45,8 @@ export default function FfmpegBoostAudio() {
   const handleUpload = async () => {
     if (!file) return alert("No file(s)");
 
+    setLoading(true);
+
     const formData = new FormData();
     formData.append("file", file);
     formData.append("multiplier", multiplier.toString());
@@ -70,6 +73,8 @@ export default function FfmpegBoostAudio() {
       a.download = filename; // use real filename from server
       a.click();
     }
+
+    setLoading(false);
   };
 
   const volumes = [
@@ -134,7 +139,6 @@ export default function FfmpegBoostAudio() {
         <GridCol>
           <Typography variant="caption">Volume</Typography>
           <Slider
-            defaultValue={10}
             value={multiplier}
             onChange={(_, value) => {
               // value can be number or number[]
@@ -151,7 +155,7 @@ export default function FfmpegBoostAudio() {
           />
         </GridCol>
         <GridCol>
-          <Button variant="contained" onClick={handleUpload}>
+          <Button variant="contained" onClick={handleUpload} loading={loading}>
             Boost & Download
           </Button>
         </GridCol>
