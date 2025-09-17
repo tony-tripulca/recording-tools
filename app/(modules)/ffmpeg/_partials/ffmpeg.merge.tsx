@@ -2,6 +2,7 @@
 
 import { GridCol, GridRow } from "@/app/_components/grids";
 import { Button, Container, Input, Stack, Typography } from "@mui/material";
+import moment from "moment";
 import { ChangeEvent, useState } from "react";
 
 export default function FfmpegMerge() {
@@ -51,11 +52,12 @@ export default function FfmpegMerge() {
 
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
+      const date = moment();
+      const filename = `${date.format("YYYYMMDDTHHmmss")}-merged.${format}`;
 
-      // Auto-download merged video
       const a = document.createElement("a");
       a.href = url;
-      a.download = `merged.${format}`;
+      a.download = filename;
       a.click();
       URL.revokeObjectURL(url);
     } catch (err) {

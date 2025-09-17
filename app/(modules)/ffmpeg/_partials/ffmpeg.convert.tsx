@@ -3,11 +3,13 @@
 import { IFileInfo } from "@/app/(modules)/ffmpeg/type";
 import { GridCol, GridRow } from "@/app/_components/grids";
 import { Button, Container, Input, Stack, Typography } from "@mui/material";
+import moment from "moment";
 import { ChangeEvent, useState } from "react";
 
 export default function FfmpegConvert() {
   const [file, setFile] = useState<File | null | undefined>(null);
   const [file_info, setFileInfo] = useState<IFileInfo | null>(null);
+  const [loading, setLoading] = useState(false);
   const [format, setFormat] = useState("");
 
   const handleFile = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +46,8 @@ export default function FfmpegConvert() {
   const handleUpload = async () => {
     if (!file) return alert("No file(s)");
 
+    setLoading(true);
+
     const formData = new FormData();
     formData.append("file", file);
     formData.append("format", format);
@@ -56,13 +60,17 @@ export default function FfmpegConvert() {
     if (res.ok) {
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
+      const date = moment();
+      const filename = `${date.format("YYYYMMDDTHHmmss")}-converted.${format}`;
 
-      // Download file automatically
       const a = document.createElement("a");
       a.href = url;
-      a.download = `converted.${format}`; // match your format
+      a.download = filename;
       a.click();
+      URL.revokeObjectURL(url);
     }
+
+    setLoading(false);
   };
 
   const formats = [
@@ -133,7 +141,7 @@ export default function FfmpegConvert() {
         </GridCol>
         <GridCol>
           <Stack direction={"row"} spacing={1}>
-            <Button variant="contained" onClick={handleUpload}>
+            <Button variant="contained" onClick={handleUpload} loading={loading}>
               Convert & Download
             </Button>
           </Stack>

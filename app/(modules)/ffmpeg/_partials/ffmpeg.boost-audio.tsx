@@ -3,6 +3,7 @@
 import { IFileInfo } from "@/app/(modules)/ffmpeg/type";
 import { GridCol, GridRow } from "@/app/_components/grids";
 import { Button, Container, Input, Slider, Stack, Typography } from "@mui/material";
+import moment from "moment";
 import { ChangeEvent, useState } from "react";
 
 export default function FfmpegBoostAudio() {
@@ -59,19 +60,16 @@ export default function FfmpegBoostAudio() {
     if (res.ok) {
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
-
-      // ✅ Get filename from Content-Disposition header
-      const disposition = res.headers.get("Content-Disposition");
-      let filename = "converted";
-      if (disposition && disposition.includes("filename=")) {
-        filename = disposition.split("filename=")[1].replace(/["']/g, ""); // remove quotes
-      }
+      const date = moment();
+      const extension = file.name.includes(".") ? file.name.slice(file.name.lastIndexOf(".") + 1) : "";
+      const filename = `${date.format("YYYYMMDDTHHmmss")}-boosted-${multiplier}x.${extension}`;
 
       // Download file automatically
       const a = document.createElement("a");
       a.href = url;
-      a.download = filename; // use real filename from server
+      a.download = filename;
       a.click();
+      URL.revokeObjectURL(url);
     }
 
     setLoading(false);
