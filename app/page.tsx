@@ -5,7 +5,7 @@ import { Box, Container, Typography } from "@mui/material";
 export default function RootPage() {
   return (
     <GridRow>
-      <GridCol size={{ xs: 12, xl: 8 }}>
+      <GridCol size={{ xs: 12, xl: 7 }}>
         <Container maxWidth={false}>
           <Box sx={{ ".MuiTypography-root span": { fontSize: 44, fontWeight: "bold" } }}>
             <Typography fontSize={22} mt={8}>Romans 12:1-2</Typography>
@@ -19,7 +19,7 @@ export default function RootPage() {
           </Box>
         </Container>
       </GridCol>
-      <GridCol size={{ xs: 12, xl: 4 }}>
+      <GridCol size={{ xs: 12, xl: 5 }}>
         <NavSide />
       </GridCol>
     </GridRow>

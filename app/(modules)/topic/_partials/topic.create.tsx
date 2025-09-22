@@ -31,7 +31,7 @@ export default function TopicCreate() {
               justifyContent: "center",
             }}
           >
-            <Typography fontSize={128} textAlign={"center"}>
+            <Typography fontSize={112} textAlign={"center"}>
               {topic}
             </Typography>
           </Box>

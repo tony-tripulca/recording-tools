@@ -31,7 +31,7 @@ export default function QuestionCreate() {
               justifyContent: "center",
             }}
           >
-            <Typography fontSize={72} textAlign={"center"}>
+            <Typography fontSize={64} textAlign={"center"}>
               {question}
             </Typography>
           </Box>

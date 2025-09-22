@@ -13,6 +13,9 @@ export default function FfmpegMerge() {
 
   const handleFiles = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(event.currentTarget.files || []);
+
+    const sortedFiles = selectedFiles.sort((a, b) => a.name.localeCompare(b.name));
+
     if (!selectedFiles.length) {
       alert("No files selected");
       return;
@@ -25,7 +28,7 @@ export default function FfmpegMerge() {
       return;
     }
 
-    setFiles(selectedFiles);
+    setFiles(sortedFiles);
   };
 
   const handleUpload = async () => {
