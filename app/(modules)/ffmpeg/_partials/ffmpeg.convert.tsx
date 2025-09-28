@@ -2,7 +2,7 @@
 
 import { IFileInfo } from "@/app/(modules)/ffmpeg/type";
 import { GridCol, GridRow } from "@/app/_components/grids";
-import { Button, Container, Input, Stack, Typography } from "@mui/material";
+import { Button, Input, Stack, Typography } from "@mui/material";
 import moment from "moment";
 import { ChangeEvent, useState } from "react";
 
@@ -80,73 +80,71 @@ export default function FfmpegConvert() {
   ];
 
   return (
-    <Container maxWidth={false}>
-      <GridRow>
-        <GridCol>
-          <Button component="label" role={undefined} variant="contained" tabIndex={-1}>
-            Select file
-            <Input type="file" onChange={handleFile} className="input-upload" />
-          </Button>
-        </GridCol>
-        <GridCol>
-          <Stack spacing={1}>
-            <Typography variant="subtitle1" fontWeight="bold">
-              {file?.name}
-            </Typography>
+    <GridRow>
+      <GridCol>
+        <Button component="label" role={undefined} variant="contained" tabIndex={-1}>
+          Select file
+          <Input type="file" onChange={handleFile} className="input-upload" />
+        </Button>
+      </GridCol>
+      <GridCol>
+        <Stack spacing={1}>
+          <Typography variant="subtitle1" fontWeight="bold">
+            {file?.name}
+          </Typography>
 
-            {file_info && (
-              <>
-                <Typography variant="body2">Format: {file_info.format}</Typography>
-                <Typography variant="body2">Duration: {file_info.duration}s</Typography>
-                <Typography variant="body2">Size: {(file_info.size / 1024 / 1024).toFixed(2)} MB</Typography>
+          {file_info && (
+            <>
+              <Typography variant="body2">Format: {file_info.format}</Typography>
+              <Typography variant="body2">Duration: {file_info.duration}s</Typography>
+              <Typography variant="body2">Size: {(file_info.size / 1024 / 1024).toFixed(2)} MB</Typography>
 
-                {file_info.video && (
-                  <Stack spacing={0.5} pl={2}>
-                    <Typography variant="subtitle2">🎥 Video</Typography>
-                    <Typography variant="body2">
-                      Codec: {file_info.video.codec} ({file_info.video.codec_params})
-                    </Typography>
-                    <Typography variant="body2">Resolution: {file_info.video.resolution}</Typography>
-                    <Typography variant="body2">Framerate: {file_info.video.framerate} fps</Typography>
-                  </Stack>
-                )}
+              {file_info.video && (
+                <Stack spacing={0.5} pl={2}>
+                  <Typography variant="subtitle2">🎥 Video</Typography>
+                  <Typography variant="body2">
+                    Codec: {file_info.video.codec} ({file_info.video.codec_params})
+                  </Typography>
+                  <Typography variant="body2">Resolution: {file_info.video.resolution}</Typography>
+                  <Typography variant="body2">Framerate: {file_info.video.framerate} fps</Typography>
+                </Stack>
+              )}
 
-                {file_info.audio && (
-                  <Stack spacing={0.5} pl={2}>
-                    <Typography variant="subtitle2">🎵 Audio</Typography>
-                    <Typography variant="body2">
-                      Codec: {file_info.audio.codec} ({file_info.audio.codec_params})
-                    </Typography>
-                    <Typography variant="body2">Sample rate: {file_info.audio.sample_rate} Hz</Typography>
-                    <Typography variant="body2">Channels: {file_info.audio.channels}</Typography>
-                  </Stack>
-                )}
-              </>
-            )}
-          </Stack>
-        </GridCol>
-        <GridCol>
-          <Typography variant="caption">Format</Typography>
-          <Stack direction={"row"} spacing={1}>
-            {formats.map((item, i) => (
-              <Button
-                variant={format === item.value ? "contained" : "outlined"}
-                key={i}
-                onClick={() => setFormat(item.value)}
-              >
-                {item.label}
-              </Button>
-            ))}
-          </Stack>
-        </GridCol>
-        <GridCol>
-          <Stack direction={"row"} spacing={1}>
-            <Button variant="contained" onClick={handleUpload} loading={loading}>
-              Convert & Download
+              {file_info.audio && (
+                <Stack spacing={0.5} pl={2}>
+                  <Typography variant="subtitle2">🎵 Audio</Typography>
+                  <Typography variant="body2">
+                    Codec: {file_info.audio.codec} ({file_info.audio.codec_params})
+                  </Typography>
+                  <Typography variant="body2">Sample rate: {file_info.audio.sample_rate} Hz</Typography>
+                  <Typography variant="body2">Channels: {file_info.audio.channels}</Typography>
+                </Stack>
+              )}
+            </>
+          )}
+        </Stack>
+      </GridCol>
+      <GridCol>
+        <Typography variant="caption">Format</Typography>
+        <Stack direction={"row"} spacing={1}>
+          {formats.map((item, i) => (
+            <Button
+              variant={format === item.value ? "contained" : "outlined"}
+              key={i}
+              onClick={() => setFormat(item.value)}
+            >
+              {item.label}
             </Button>
-          </Stack>
-        </GridCol>
-      </GridRow>
-    </Container>
+          ))}
+        </Stack>
+      </GridCol>
+      <GridCol>
+        <Stack direction={"row"} spacing={1}>
+          <Button variant="contained" onClick={handleUpload} loading={loading}>
+            Convert & Download
+          </Button>
+        </Stack>
+      </GridCol>
+    </GridRow>
   );
 }

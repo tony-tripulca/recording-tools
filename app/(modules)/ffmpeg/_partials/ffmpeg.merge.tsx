@@ -1,7 +1,7 @@
 "use client";
 
 import { GridCol, GridRow } from "@/app/_components/grids";
-import { Button, Container, Input, Stack, Typography } from "@mui/material";
+import { Button, Input, Stack, Typography } from "@mui/material";
 import moment from "moment";
 import { ChangeEvent, useState } from "react";
 
@@ -81,59 +81,57 @@ export default function FfmpegMerge() {
   ];
 
   return (
-    <Container maxWidth={false}>
-      <GridRow>
-        <GridCol>
-          <Button component="label" role={undefined} variant="contained" tabIndex={-1}>
-            Select files
-            <Input type="file" onChange={handleFiles} className="input-upload" inputProps={{ multiple: true }} />
-          </Button>
-        </GridCol>
-        <GridCol>
-          <Stack spacing={1}>
-            {files?.map((f, i) => (
-              <Typography key={i} variant="subtitle1" fontWeight="bold">
-                {f?.name}
-              </Typography>
-            ))}
-          </Stack>
-        </GridCol>
-        <GridCol>
-          <Typography variant="caption">Format</Typography>
-          <Stack direction={"row"} spacing={1}>
-            {formats.map((item, i) => (
-              <Button
-                variant={format === item.value ? "contained" : "outlined"}
-                key={i}
-                onClick={() => setFormat(item.value)}
-              >
-                {item.label}
-              </Button>
-            ))}
-          </Stack>
-        </GridCol>
-        <GridCol>
-          <Typography variant="caption">Resolution</Typography>
-          <Stack direction={"row"} spacing={1}>
-            {resolutions.map((item, i) => (
-              <Button
-                variant={resolution === item.value ? "contained" : "outlined"}
-                key={i}
-                onClick={() => setResolution(item.value)}
-              >
-                {item.label}
-              </Button>
-            ))}
-          </Stack>
-        </GridCol>
-        <GridCol>
-          <Stack direction={"row"} spacing={1}>
-            <Button variant="contained" onClick={handleUpload} loading={loading}>
-              Merge & Download
+    <GridRow>
+      <GridCol>
+        <Button component="label" role={undefined} variant="contained" tabIndex={-1}>
+          Select files
+          <Input type="file" onChange={handleFiles} className="input-upload" inputProps={{ multiple: true }} />
+        </Button>
+      </GridCol>
+      <GridCol>
+        <Stack spacing={1}>
+          {files?.map((f, i) => (
+            <Typography key={i} variant="subtitle1" fontWeight="bold">
+              {f?.name}
+            </Typography>
+          ))}
+        </Stack>
+      </GridCol>
+      <GridCol>
+        <Typography variant="caption">Format</Typography>
+        <Stack direction={"row"} spacing={1}>
+          {formats.map((item, i) => (
+            <Button
+              variant={format === item.value ? "contained" : "outlined"}
+              key={i}
+              onClick={() => setFormat(item.value)}
+            >
+              {item.label}
             </Button>
-          </Stack>
-        </GridCol>
-      </GridRow>
-    </Container>
+          ))}
+        </Stack>
+      </GridCol>
+      <GridCol>
+        <Typography variant="caption">Resolution</Typography>
+        <Stack direction={"row"} spacing={1}>
+          {resolutions.map((item, i) => (
+            <Button
+              variant={resolution === item.value ? "contained" : "outlined"}
+              key={i}
+              onClick={() => setResolution(item.value)}
+            >
+              {item.label}
+            </Button>
+          ))}
+        </Stack>
+      </GridCol>
+      <GridCol>
+        <Stack direction={"row"} spacing={1}>
+          <Button variant="contained" onClick={handleUpload} loading={loading}>
+            Merge & Download
+          </Button>
+        </Stack>
+      </GridCol>
+    </GridRow>
   );
 }
