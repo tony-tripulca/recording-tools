@@ -7,3 +7,20 @@
     border-radius: 12px;
   }
 }
+
+#nav-bottom {
+  position: fixed;
+  bottom: 2%;
+  right: 42%;
+  width: 40%;
+
+  .MuiStack-root {
+    .MuiButton-root {
+      justify-content: flex-start;
+      margin-bottom: 12px;
+      margin-right: 12px;
+      text-transform: none;
+      border-radius: 12px;
+    }
+  }
+}

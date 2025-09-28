@@ -1,7 +1,7 @@
 "use client";
 
 import { GridCol, GridRow } from "@/app/_components/grids";
-import { Box, Button, Container, FormControl, MenuItem, Select, Stack, TextField } from "@mui/material";
+import { Box, Button, FormControl, MenuItem, Select, Stack, TextField } from "@mui/material";
 import { FormEvent, useState } from "react";
 
 const versions = [
@@ -54,40 +54,38 @@ export default function BibleSearch() {
   };
 
   return (
-    <Container maxWidth={false} sx={{ py: 2 }}>
-      <GridRow>
-        <GridCol sx={{ display: "flex", justifyContent: "center" }}>
-          <Box component={"form"} onSubmit={handleFindVerses}>
-            <Stack direction={"row"} spacing={1} width={880}>
-              <FormControl fullWidth size="small">
-                <Select name="version" value={version} onChange={({ target }) => setVersion(target.value)}>
-                  {versions.map((v) => (
-                    <MenuItem key={v.value} value={v.value}>
-                      {v.label}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <TextField
-                fullWidth
-                size="small"
-                type="search"
-                name="verses"
-                value={verses}
-                onChange={({ target }) => setVerses(target.value)}
-              />
-              <Button variant="contained" type="submit">
-                Find
-              </Button>
-            </Stack>
-          </Box>
-        </GridCol>
-        <GridCol>
-          <Box className="iframe-holder">
-            <Box component={"iframe"} src={url || undefined} title="Bible Gateway" loading="lazy" className="iframe" />
-          </Box>
-        </GridCol>
-      </GridRow>
-    </Container>
+    <GridRow>
+      <GridCol>
+        <Box component={"form"} onSubmit={handleFindVerses}>
+          <Stack direction={"row"} spacing={1} width={880}>
+            <FormControl fullWidth size="small">
+              <Select name="version" value={version} onChange={({ target }) => setVersion(target.value)}>
+                {versions.map((v) => (
+                  <MenuItem key={v.value} value={v.value}>
+                    {v.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <TextField
+              fullWidth
+              size="small"
+              type="search"
+              name="verses"
+              value={verses}
+              onChange={({ target }) => setVerses(target.value)}
+            />
+            <Button variant="contained" type="submit">
+              Find
+            </Button>
+          </Stack>
+        </Box>
+      </GridCol>
+      <GridCol>
+        <Box className="iframe-holder">
+          <Box component={"iframe"} src={url || undefined} title="Bible Gateway" loading="lazy" className="iframe" />
+        </Box>
+      </GridCol>
+    </GridRow>
   );
 }

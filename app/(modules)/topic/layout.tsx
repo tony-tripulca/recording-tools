@@ -1,6 +1,6 @@
-import { GridCol, GridRow } from "@/app/_components/grids";
-import { NavSide } from "@/app/_components/navs";
+import { NavBottom } from "@/app/_components/navs";
 import { SectionMain } from "@/app/_components/sections";
+import { Box } from "@mui/material";
 import React from "react";
 import "./layout.scss";
 
@@ -10,13 +10,9 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <GridRow>
-      <GridCol size={{ xs: 12, xl: 7 }}>
-        <SectionMain module="topic">{children}</SectionMain>
-      </GridCol>
-      <GridCol size={{ xs: 12, xl: 5 }}>
-        <NavSide />
-      </GridCol>
-    </GridRow>
+    <Box className="box-content">
+      <SectionMain module="topic">{children}</SectionMain>
+      <NavBottom />
+    </Box>
   );
 }
